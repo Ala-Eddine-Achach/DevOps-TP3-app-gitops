@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: gitops-demo-app
   namespace: dev
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-app
+      app: gitops-demo-app
   template:
     metadata:
       labels:
-        app: my-app
+        app: gitops-demo-app
     spec:
-      imagePullSecrets:              # ← LIGNE À AJOUTER
-      - name: acr-secret             # ← LIGNE À AJOUTER
+      imagePullSecrets:
+      - name: ghcr-secret          # secret for GHCR authentication
       containers:
-      - name: my-app
-        image: acrgitopslab.azurecr.io/gitops-demo-app:latest  # ← Vérifiez le nom
+      - name: gitops-demo-app
+        image: ghcr.io/<your-github-username>/gitops-demo-app:latest
         ports:
         - containerPort: 3000
         env:
@@ -32,3 +32,15 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 3
