@@ -14,10 +14,10 @@ spec:
         app: gitops-demo-app
     spec:
       imagePullSecrets:
-      - name: ghcr-secret          # secret for GHCR authentication
+      - name: ghcr-secret          # Kubernetes secret for GHCR auth
       containers:
       - name: gitops-demo-app
-        image: ghcr.io/<your-github-username>/gitops-demo-app:latest
+        image: ghcr.io/Ala-Eddine-Achach/gitops-demo-app:latest
         ports:
         - containerPort: 3000
         env:
