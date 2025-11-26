@@ -17,7 +17,7 @@ spec:
       - name: ghcr-secret          # Kubernetes secret for GHCR auth
       containers:
       - name: gitops-demo-app
-        image: ghcr.io/ala-eddine-achach/gitops-demo-app:latest
+        image: ghcr.io/ala-eddine-achach/gitops-demo-app:710dfc16aaff671b0c5693683c51a662de6a5cd9
         ports:
         - containerPort: 3000
         env:
