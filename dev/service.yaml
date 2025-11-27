@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer   # <- ici
   selector:
-    app: my-app
+    app: gitops-demo-app
   ports:
   - protocol: TCP
     port: 80
